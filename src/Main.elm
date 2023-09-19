@@ -192,7 +192,7 @@ changeRouteTo maybeRoute model =
                 |> updateWith Login GotLoginMsg model
 
         Just Route.Register ->
-            Register.init session
+            Register.initThingy session
                 |> updateWith Register GotRegisterMsg model
 
         Just (Route.Profile username) ->

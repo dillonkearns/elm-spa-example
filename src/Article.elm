@@ -1,4 +1,4 @@
-module Article exposing (Article, Full, Preview, author, body, favorite, favoriteButton, fetch, fromPreview, fullDecoder, mapAuthor, metadata, previewDecoder, slug, unfavorite, unfavoriteButton)
+module Article exposing (Article(..), Full(..), Internals, Metadata, Preview(..), User, author, body, favorite, favoriteButton, fetch, fromPreview, fullDecoder, greet, internalsDecoder, mapAuthor, metadata, metadataDecoder, onClickStopPropagation, previewDecoder, slug, toggleFavoriteButton, unfavorite, unfavoriteButton)
 
 {-| The interface to the Article data structure.
 
@@ -9,13 +9,16 @@ This includes:
   - Ways to access information about an article
   - Converting between various types
 
+[`author`](#author)
+
+[Foo](Article.Slug#toString)
+
 -}
 
 import Api exposing (Cred)
 import Api.Endpoint as Endpoint
 import Article.Body as Body exposing (Body)
 import Article.Slug as Slug exposing (Slug)
-import Article.Tag as Tag exposing (Tag)
 import Author exposing (Author)
 import Html exposing (Attribute, Html, i)
 import Html.Attributes exposing (class)
@@ -24,12 +27,7 @@ import Http
 import Iso8601
 import Json.Decode as Decode exposing (Decoder)
 import Json.Decode.Pipeline exposing (custom, hardcoded, required)
-import Json.Encode as Encode
-import Markdown
-import Profile exposing (Profile)
 import Time
-import Username as Username exposing (Username)
-import Viewer exposing (Viewer)
 
 
 
@@ -236,32 +234,20 @@ You pass it some configuration, followed by a `List (Attribute msg)` and a
 `List (Html msg)`, just like any standard Html element.
 
 -}
-favoriteButton :
-    Cred
-    -> msg
-    -> List (Attribute msg)
-    -> List (Html msg)
-    -> Html msg
+favoriteButton : a -> b -> List (Attribute b) -> List (Html b) -> Html b
 favoriteButton _ msg attrs kids =
+    let
+        foobar =
+            "Hello!"
+    in
     toggleFavoriteButton "btn btn-sm btn-outline-primary" msg attrs kids
 
 
-unfavoriteButton :
-    Cred
-    -> msg
-    -> List (Attribute msg)
-    -> List (Html msg)
-    -> Html msg
 unfavoriteButton _ msg attrs kids =
     toggleFavoriteButton "btn btn-sm btn-primary" msg attrs kids
 
 
-toggleFavoriteButton :
-    String
-    -> msg
-    -> List (Attribute msg)
-    -> List (Html msg)
-    -> Html msg
+toggleFavoriteButton : String -> msg -> List (Attribute msg) -> List (Html msg) -> Html msg
 toggleFavoriteButton classStr msg attrs kids =
     Html.button
         (class classStr :: onClickStopPropagation msg :: attrs)
@@ -272,3 +258,19 @@ onClickStopPropagation : msg -> Attribute msg
 onClickStopPropagation msg =
     stopPropagationOn "click"
         (Decode.succeed ( msg, True ))
+
+
+type alias User =
+    { first : String
+    , last : String
+    }
+
+
+example1 : User -> String
+example1 user =
+    greet user
+
+
+greet : User -> unknown
+greet arg1 =
+    Debug.todo "NOT IMPLEMENTED"

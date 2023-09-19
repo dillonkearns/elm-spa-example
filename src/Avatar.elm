@@ -1,4 +1,4 @@
-module Avatar exposing (Avatar, decoder, encode, src, toMaybeString)
+module Avatar exposing (Avatar, decoder, encode, src)
 
 import Asset
 import Html exposing (Attribute)

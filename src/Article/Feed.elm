@@ -277,3 +277,11 @@ fave toRequest cred slug model =
         |> Http.toTask
         |> Task.attempt CompletedFavorite
     )
+
+
+abc =
+    []
+
+
+foo =
+    []

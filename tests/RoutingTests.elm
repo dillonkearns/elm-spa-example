@@ -1,13 +1,14 @@
 module RoutingTests exposing (..)
 
 import Article
-import Article.Slug as Slug exposing (Slug)
-import Expect exposing (Expectation)
+import Article.Slug exposing (Slug)
+import Expect
 import Json.Decode as Decode exposing (decodeString)
 import Route exposing (Route(..))
 import Test exposing (..)
 import Url exposing (Url)
 import Username exposing (Username)
+
 
 
 -- TODO need to add lots more tests!
@@ -26,6 +27,33 @@ fromUrl =
         , testUrl "editor" NewArticle
         , testUrl "editor/foo" (EditArticle (slugFromStr "foo"))
         ]
+
+
+myTest : Test
+myTest =
+    describe "myDescribe"
+        [ test "myTest1" <|
+            \() ->
+                Expect.equal 2 3
+        , test "test2" <|
+            \() ->
+                Expect.equal 2 2
+        , test "test3" <|
+            \() ->
+                Expect.equal 2 3
+        , describe "describe3"
+            [ test "myTesta" <|
+                \() ->
+                    Expect.equal 1 1
+            , test "myTestb" <|
+                \() ->
+                    Expect.equal 1 1
+            ]
+        ]
+
+
+example1 a b =
+    a + b * 2
 
 
 
@@ -98,3 +126,7 @@ slugFromStr str =
 
         Err err ->
             Debug.todo ("Error decoding Slug from \"" ++ str ++ "\": " ++ Decode.errorToString err)
+
+
+example2 { first, last } =
+    "Hello, " ++ first ++ " " ++ last

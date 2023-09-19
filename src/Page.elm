@@ -1,14 +1,11 @@
 module Page exposing (Page(..), view, viewErrors)
 
-import Api exposing (Cred)
 import Avatar
 import Browser exposing (Document)
 import Html exposing (Html, a, button, div, footer, i, img, li, nav, p, span, text, ul)
 import Html.Attributes exposing (class, classList, href, style)
 import Html.Events exposing (onClick)
-import Profile
 import Route exposing (Route)
-import Session exposing (Session)
 import Username exposing (Username)
 import Viewer exposing (Viewer)
 
@@ -23,9 +20,6 @@ under Other.
 type Page
     = Other
     | Home
-    | Login
-    | Register
-    | Settings
     | Profile Username
     | NewArticle
 
@@ -73,6 +67,9 @@ viewMenu page maybeViewer =
 
                 avatar =
                     Viewer.avatar viewer
+
+                ( a, b ) =
+                    ( "Hello", 3.14 )
             in
             [ linkTo Route.NewArticle [ i [ class "ion-compose" ] [], text "\u{00A0}New Post" ]
             , linkTo Route.Settings [ i [ class "ion-gear-a" ] [], text "\u{00A0}Settings" ]
@@ -116,15 +113,6 @@ isActive page route =
         ( Home, Route.Home ) ->
             True
 
-        ( Login, Route.Login ) ->
-            True
-
-        ( Register, Route.Register ) ->
-            True
-
-        ( Settings, Route.Settings ) ->
-            True
-
         ( Profile pageUsername, Route.Profile routeUsername ) ->
             pageUsername == routeUsername
 
@@ -154,3 +142,12 @@ viewErrors dismissErrors errors =
         <|
             List.map (\error -> p [] [ text error ]) errors
                 ++ [ button [ onClick dismissErrors ] [ text "Ok" ] ]
+
+
+foo =
+    [] ++ [] ++ []
+
+
+bar : String
+bar =
+    "" ++ "" ++ ""

@@ -1,4 +1,17 @@
-module Author exposing (Author(..), FollowedAuthor, UnfollowedAuthor, decoder, fetch, follow, followButton, profile, requestFollow, requestUnfollow, unfollow, unfollowButton, username, view)
+module Author exposing
+    ( Author(..)
+    , FollowedAuthor
+    , UnfollowedAuthor
+    , decoder
+    , fetch
+    , followButton
+    , profile
+    , requestFollow
+    , requestUnfollow
+    , unfollowButton
+    , username
+    , view
+    )
 
 {-| The author of an Article. It includes a Profile.
 
@@ -168,6 +181,8 @@ unfollowButton toMsg cred ((FollowedAuthor uname _) as author) =
         uname
 
 
+{-| @deprecated Don't use
+-}
 toggleFollowButton : String -> List String -> msg -> Username -> Html msg
 toggleFollowButton txt extraClasses msgWhenClicked uname =
     let

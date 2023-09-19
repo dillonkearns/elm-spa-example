@@ -1,4 +1,17 @@
-module Page.Register exposing (Model, Msg, init, subscriptions, toSession, update, view)
+module Page.Register exposing
+    ( initThingy
+    , Model, Msg, subscriptions, toSession, update, view
+    )
+
+{-|
+
+@docs initThingy
+
+See [`initThingy`](#initThingy)
+
+[`Article.Metadata`](Page.Article#Model)
+
+-}
 
 import Api exposing (Cred)
 import Browser.Navigation as Nav
@@ -37,8 +50,8 @@ type Problem
     | ServerError String
 
 
-init : Session -> ( Model, Cmd msg )
-init session =
+initThingy : Session -> ( Model, Cmd msg )
+initThingy session =
     ( { session = session
       , problems = []
       , form =
@@ -237,6 +250,14 @@ fieldsToValidate =
     , Email
     , Password
     ]
+
+
+type SingleVariant
+    = SingleVariant
+
+
+extract SingleVariant =
+    SingleVariant
 
 
 {-| Trim the form and validate its fields. If there are problems, report them!

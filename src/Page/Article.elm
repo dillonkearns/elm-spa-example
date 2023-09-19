@@ -573,6 +573,7 @@ favoriteButton cred article =
 deleteButton : Cred -> Article a -> Html Msg
 deleteButton cred article =
     let
+        msg : Msg
         msg =
             ClickedDeleteArticle cred (Article.slug article)
     in
@@ -584,3 +585,7 @@ editButton : Article a -> Html Msg
 editButton article =
     a [ class "btn btn-outline-secondary btn-sm", Route.href (Route.EditArticle (Article.slug article)) ]
         [ i [ class "ion-edit" ] [], text " Edit Article" ]
+
+
+foo =
+    []
